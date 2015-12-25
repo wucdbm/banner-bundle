@@ -1,2 +1,4 @@
 # banner-bundle
-A simple banner bundle for symfony2
+
+# TODO
+- Documentation - how to use

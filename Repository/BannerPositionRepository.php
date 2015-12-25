@@ -1,0 +1,109 @@
+<?php
+
+namespace Wucdbm\Bundle\BannerBundle\Repository;
+
+use Wucdbm\Bundle\BannerBundle\Entity\BannerPosition;
+use Wucdbm\Bundle\BannerBundle\Filter\BannerPositionChoiceFilter;
+use Wucdbm\Bundle\BannerBundle\Filter\BannerPositionFilter;
+use Wucdbm\Bundle\WucdbmBundle\Repository\AbstractRepository;
+
+class BannerPositionRepository extends AbstractRepository {
+
+    /**
+     * @param $name
+     * @return BannerPosition|null
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function findOneByName($name) {
+        $builder = $this->createQueryBuilder('p')
+            ->addSelect('b')
+            ->leftJoin('p.banner', 'b')
+            ->andWhere('p.name = :name')
+            ->setParameter('name', $name);
+        $query = $builder->getQuery();
+
+        return $query->getOneOrNullResult();
+    }
+
+    public function findAllActive() {
+        $builder = $this->createQueryBuilder('p')
+            ->addSelect('b')
+            ->leftJoin('p.banner', 'b')
+            ->andWhere('p.isActive = :isActive')
+            ->setParameter('isActive', 1);
+        $query = $builder->getQuery();
+
+        return $query->getResult();
+    }
+
+    /**
+     * @param BannerPositionFilter $filter
+     * @return BannerPosition[]
+     */
+    public function filter(BannerPositionFilter $filter) {
+        $builder = $this->createQueryBuilder('p')
+            ->addSelect('b')
+            ->leftJoin('p.banner', 'b');
+
+        if ($filter->getId()) {
+            $builder->andWhere('p.id = :id')
+                ->setParameter('id', $filter->getId());
+        }
+
+        if ($filter->getName()) {
+            $builder->andWhere('p.name = :name')
+                ->setParameter('name', $filter->getName());
+        }
+
+        if (null !== $filter->getIsActive()) {
+            $builder->andWhere('p.isActive = :isActive')
+                ->setParameter('isActive', $filter->getIsActive());
+        }
+
+        return $this->returnFilteredEntities($builder, $filter, 'p.id');
+    }
+
+    /**
+     * @param BannerPositionChoiceFilter $filter
+     * @return BannerPosition[]
+     */
+    public function filterForChoose(BannerPositionChoiceFilter $filter) {
+        $builder = $this->createQueryBuilder('p')
+            ->addSelect('b')
+            ->leftJoin('p.banner', 'b');
+
+        if (null !== $filter->getBannerStatus()) {
+            switch ($filter->getBannerStatus()) {
+                case BannerPositionChoiceFilter::BANNER_STATUS_HAS_BANNER:
+                    $builder->andWhere('p.banner IS NOT NULL');
+                    break;
+                case BannerPositionChoiceFilter::BANNER_STATUS_DOES_NOT_HAVE_BANNER:
+                    $builder->andWhere('p.banner IS NULL');
+                    break;
+            }
+        }
+
+        if ($filter->getId()) {
+            $builder->andWhere('p.id = :id')
+                ->setParameter('id', $filter->getId());
+        }
+
+        return $this->returnFilteredEntities($builder, $filter, 'p.id');
+    }
+
+    public function save(BannerPosition $position) {
+        $em = $this->getEntityManager();
+        $em->persist($position);
+        $em->flush();
+    }
+
+    public function remove(BannerPosition $position) {
+        $em = $this->getEntityManager();
+        $em->remove($position);
+        $em->flush();
+    }
+
+    public function getManager() {
+        return $this->getEntityManager();
+    }
+}

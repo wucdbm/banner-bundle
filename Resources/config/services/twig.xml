@@ -1,0 +1,15 @@
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+
+        <service id="wucdbm_banner.twig.banner" class="Wucdbm\Bundle\BannerBundle\Twig\BannerExtension">
+            <tag name="twig.extension"/>
+            <argument type="service" id="wucdbm_banner.manager.banners"/>
+            <argument type="service" id="twig"/>
+            <argument type="service" id="service_container"/>
+        </service>
+
+    </services>
+</container>

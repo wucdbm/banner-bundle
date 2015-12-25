@@ -1,0 +1,12 @@
+{% extends '@WucdbmBanner/Banner/base.html.twig' %}
+
+{% block content %}
+    {% include '@WucdbmBanner/Banner/form.html.twig' %}
+{% endblock %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li>
+        Create
+    </li>
+{% endblock %}
