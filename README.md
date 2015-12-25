@@ -1,5 +1,9 @@
 # banner-bundle
 
+## TODO
+
+- Maybe port the simple banner generator over to this bundle?
+
 ## Usage
 
 Having properly configured uglifycss and uglifyjs is a requirement for production.
