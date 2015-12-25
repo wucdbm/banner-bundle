@@ -32,3 +32,11 @@ This can also be used for tracking or anything external you would like to add to
 Positions are placed in your code on your pages, like this `{{ 'YourPositionName'|banner }}` (There is also a twig function)
 You can also print a link to the same page you're at, but with positions in debug mode, but only if your user has the `ROLE_ADMIN` role using `{{ showBannerPositionsUrl() }}`
 If a position is lacking a banner, is inactive, the banner is inactive, or any other error, if you have `ROLE_ADMIN`, you will get an error message
+
+
+## Caching
+
+If you need cache: Alias your own `Wucdbm\Bundle\WucdbmBundle\Cache\Storage\AbstractStorage` to `wucdbm_banner.cache.persistent`, for example:
+
+`<service id="wucdbm_banner.cache.persistent" alias="app.cache" />` where the `app.cache` service is an instance of `Wucdbm\Bundle\WucdbmBundle\Cache\Storage\AbstractStorage`
+
