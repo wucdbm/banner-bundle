@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="Wucdbm\Bundle\BannerBundle\Repository\BannerRepository")
- * @ORM\Table(name="_wucdbm_banners",
+ * @ORM\Table(name="_wucdbm__banners",
  *      options={"collate"="utf8_general_ci"},
  *      indexes={
  *          @ORM\Index(name="is_active", columns={"is_active"})
