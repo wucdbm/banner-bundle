@@ -92,11 +92,7 @@
 {% include '@WucdbmBanner/_layout/assets/scripts.html.twig' %}
 <script type="text/javascript">
     $(function () {
-        $('.x-editable-text').editable({
-            success: function(data, newValue) {
-                $('#editBookingContainer').trigger('refresh');
-            }
-        });
+        $('.x-editable-text').editable();
         if (window.frameElement) {
             var height = $(document).height();
             if (750 > height) {
