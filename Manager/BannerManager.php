@@ -42,22 +42,31 @@ class BannerManager extends AbstractManager {
     public function getBanners() {
         $key = $this->localCache->generateKey('banners');
         try {
-            return $this->localCache->get($key);
+            /** @var BannerCollection $collection */
+            $collection = $this->localCache->get($key);
+            $collection->setDebug($this->isDebug());
+
+            return $collection;
         } catch (CacheMissException $ex) {
             $positions = $this->getPositions();
-            $debug = false;
-            $parameter = $this->container->getParameter('wucdbm_banner.show_positions_parameter');
-            $requestStack = $this->container->get('request_stack');
-            $request = $requestStack->getCurrentRequest();
-            if ($request) {
-                $debug = $request->query->get($parameter, false);
-            }
-
+            $debug = $this->isDebug();
             $collection = new BannerCollection($positions, $debug);
             $this->localCache->forever($key, $collection);
 
             return $collection;
         }
+    }
+
+    protected function isDebug() {
+        $debug = false;
+        $parameter = $this->container->getParameter('wucdbm_banner.show_positions_parameter');
+        $requestStack = $this->container->get('request_stack');
+        $request = $requestStack->getCurrentRequest();
+        if ($request) {
+            $debug = $request->query->get($parameter, false);
+        }
+
+        return $debug;
     }
 
     public function getPositions() {
