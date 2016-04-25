@@ -3,6 +3,8 @@
 ## TODO
 
 - Maybe port the simple banner generator over to this bundle?
+- View positions parameter with default config
+- Admin role config
 
 ## Usage
 
