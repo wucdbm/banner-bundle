@@ -13,9 +13,9 @@
         }
     ],
     "require": {
-        "php": "~5.5|~7.0",
-        "symfony/symfony": "~3.0",
-        "wucdbm/wucdbm-bundle": "~3.0"
+        "php": "~7.1",
+        "symfony/symfony": "~3.4|~4.0",
+        "wucdbm/quick-ui-bundle": "~0.2"
     },
     "autoload": {
         "psr-4": {

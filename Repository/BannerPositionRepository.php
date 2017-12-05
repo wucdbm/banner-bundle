@@ -2,15 +2,19 @@
 
 namespace Wucdbm\Bundle\BannerBundle\Repository;
 
+use Doctrine\ORM\EntityRepository;
 use Wucdbm\Bundle\BannerBundle\Entity\BannerPosition;
 use Wucdbm\Bundle\BannerBundle\Filter\BannerPositionChoiceFilter;
 use Wucdbm\Bundle\BannerBundle\Filter\BannerPositionFilter;
-use Wucdbm\Bundle\WucdbmBundle\Repository\AbstractRepository;
+use Wucdbm\Bundle\QuickUIBundle\Repository\QuickUIRepositoryTrait;
 
-class BannerPositionRepository extends AbstractRepository {
+class BannerPositionRepository extends EntityRepository {
+
+    use QuickUIRepositoryTrait;
 
     /**
      * @param $name
+     *
      * @return BannerPosition|null
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
@@ -38,6 +42,7 @@ class BannerPositionRepository extends AbstractRepository {
 
     /**
      * @param BannerPositionFilter $filter
+     *
      * @return BannerPosition[]
      */
     public function filter(BannerPositionFilter $filter) {
@@ -65,6 +70,7 @@ class BannerPositionRepository extends AbstractRepository {
 
     /**
      * @param BannerPositionChoiceFilter $filter
+     *
      * @return BannerPosition[]
      */
     public function filterForChoose(BannerPositionChoiceFilter $filter) {

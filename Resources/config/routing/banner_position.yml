@@ -1,27 +1,27 @@
 wucdbm_banner_position_list:
       path:      /list
-      defaults:  { _controller: WucdbmBannerBundle:BannerPosition:list }
+      defaults:  { _controller: Wucdbm\Bundle\BannerBundle\Controller\BannerPositionController::listAction }
 
 wucdbm_banner_position_edit:
       path:      /{id}/edit
-      defaults:  { _controller: WucdbmBannerBundle:BannerPosition:edit }
+      defaults:  { _controller: Wucdbm\Bundle\BannerBundle\Controller\BannerPositionController::editAction }
 
 wucdbm_banner_position_create:
       path:      /new
-      defaults:  { _controller: WucdbmBannerBundle:BannerPosition:create }
+      defaults:  { _controller: Wucdbm\Bundle\BannerBundle\Controller\BannerPositionController::createAction }
 
 wucdbm_banner_position_activate:
       path:      /{id}/activate
-      defaults:  { _controller: WucdbmBannerBundle:BannerPosition:activate }
+      defaults:  { _controller: Wucdbm\Bundle\BannerBundle\Controller\BannerPositionController::activateAction }
 
 wucdbm_banner_position_deactivate:
       path:      /{id}/deactivate
-      defaults:  { _controller: WucdbmBannerBundle:BannerPosition:deactivate }
+      defaults:  { _controller: Wucdbm\Bundle\BannerBundle\Controller\BannerPositionController::deactivateAction }
 
 wucdbm_banner_position_refresh:
       path:      /{id}/refresh
-      defaults:  { _controller: WucdbmBannerBundle:BannerPosition:refresh }
+      defaults:  { _controller: Wucdbm\Bundle\BannerBundle\Controller\BannerPositionController::refreshAction }
 
 wucdbm_banner_position_delete:
       path:      /{id}/delete
-      defaults:  { _controller: WucdbmBannerBundle:BannerPosition:delete }
+      defaults:  { _controller: Wucdbm\Bundle\BannerBundle\Controller\BannerPositionController::deleteAction }

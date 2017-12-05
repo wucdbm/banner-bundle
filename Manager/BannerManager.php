@@ -2,68 +2,86 @@
 
 namespace Wucdbm\Bundle\BannerBundle\Manager;
 
+use Psr\Cache\CacheItemPoolInterface;
+use Symfony\Component\Cache\Adapter\ArrayAdapter;
 use Wucdbm\Bundle\BannerBundle\Collection\BannerCollection;
 use Wucdbm\Bundle\BannerBundle\Entity\Banner;
 use Wucdbm\Bundle\BannerBundle\Entity\BannerPosition;
-use Wucdbm\Bundle\WucdbmBundle\Cache\Exception\CacheMissException;
-use Wucdbm\Bundle\WucdbmBundle\Manager\AbstractManager;
+use Wucdbm\Bundle\BannerBundle\Repository\BannerPositionRepository;
+use Wucdbm\Bundle\BannerBundle\Repository\BannerRepository;
 
-class BannerManager extends AbstractManager {
+class BannerManager {
+
+    /** @var BannerRepository */
+    protected $bannerRepo;
+
+    /** @var BannerPositionRepository */
+    protected $bannerPositionRepo;
+
+    /** @var CacheItemPoolInterface */
+    protected $cache;
+
+    /** @var ArrayAdapter */
+    protected $localCache;
+
+    public function __construct(BannerRepository $bannerRepo, BannerPositionRepository $bannerPositionRepo,
+                                CacheItemPoolInterface $cache) {
+        $this->bannerRepo = $bannerRepo;
+        $this->bannerPositionRepo = $bannerPositionRepo;
+        $this->cache = $cache;
+        $this->localCache = new ArrayAdapter();
+    }
 
     public function saveBanner(Banner $banner) {
-        $repo = $this->container->get('wucdbm_banner.repo.banners');
-        $repo->save($banner);
+        $this->bannerRepo->save($banner);
         $this->uncachePositions();
     }
 
     public function savePosition(BannerPosition $position) {
-        $repo = $this->container->get('wucdbm_banner.repo.banner_positions');
-        $repo->save($position);
+        $this->bannerPositionRepo->save($position);
         $this->uncachePositions();
     }
 
     public function removeBanner(Banner $banner) {
-        $repo = $this->container->get('wucdbm_banner.repo.banners');
-        $repo->remove($banner);
+        $this->bannerRepo->remove($banner);
         $this->uncachePositions();
     }
 
     public function removePosition(BannerPosition $position) {
-        $repo = $this->container->get('wucdbm_banner.repo.banner_positions');
-        $repo->remove($position);
+        $this->bannerPositionRepo->remove($position);
         $this->uncachePositions();
     }
 
-    /**
-     * Returns all active banner positions
-     *
-     * @return BannerCollection
-     */
-    public function getBanners() {
-        $key = $this->localCache->generateKey('banners');
-        try {
+    public function getBanners(): BannerCollection {
+        $key = 'wucdbm_banner.banners';
+
+        $item = $this->localCache->getItem($key);
+
+        if ($item->isHit()) {
             /** @var BannerCollection $collection */
-            $collection = $this->localCache->get($key);
+            $collection = $item->get();
             $collection->setDebug($this->isDebug());
 
             return $collection;
-        } catch (CacheMissException $ex) {
-            $positions = $this->getPositions();
-            $debug = $this->isDebug();
-            $collection = new BannerCollection($positions, $debug);
-            $this->localCache->forever($key, $collection);
-
-            return $collection;
         }
+
+        $positions = $this->getPositions();
+        $debug = $this->isDebug();
+        $collection = new BannerCollection($positions, $debug);
+        $item->set($collection);
+        $this->localCache->save($item);
+
+        return $collection;
     }
 
-    protected function isDebug() {
+    protected function isDebug(): bool {
         $debug = false;
         $parameter = $this->container->getParameter('wucdbm_banner.show_positions_parameter');
         $requestStack = $this->container->get('request_stack');
         $request = $requestStack->getCurrentRequest();
-        if ($request) {
-            $debug = $request->query->get($parameter, false);
+
+        if ($request && $request->query->get($parameter, false)) {
+            $debug = true;
         }
 
         return $debug;
@@ -71,37 +89,31 @@ class BannerManager extends AbstractManager {
 
     public function getPositions() {
         $key = $this->getPositionsKey();
-        try {
-            return $this->cache->get($key);
-        } catch (CacheMissException $e) {
-            $repo = $this->container->get('wucdbm_banner.repo.banner_positions');
-            $positions = $repo->findAllActive();
-            $this->cache->forever($key, $positions);
 
-            return $positions;
+        $item = $this->cache->getItem($key);
+
+        if ($item->isHit()) {
+            return $item->get();
         }
+
+        $positions = $this->bannerPositionRepo->findAllActive();
+        $item->set($positions);
+        $this->cache->save($item);
+
+        return $positions;
     }
 
     public function uncachePositions() {
         $key = $this->getPositionsKey();
-        $this->cache->remove($key);
+        $this->cache->deleteItem($key);
     }
 
-    protected function getPositionsKey() {
-        return $this->cache->generateKey('banners.positions');
+    protected function getPositionsKey(): string {
+        return 'wucdbm_banner.banners.positions';
     }
 
-    /**
-     * @param $name
-     * @return BannerPosition|null
-     */
-    public function getPositionByName($name) {
-        return $this->container->get('wucdbm_banner.repo.banner_positions')->findOneByName($name);
-    }
-
-    public function uncacheBannerPositions() {
-        $key = $this->cache->generateKey('banners.positions');
-        $this->cache->remove($key);
+    public function getPositionByName($name): ?BannerPosition {
+        return $this->bannerPositionRepo->findOneByName($name);
     }
 
 }

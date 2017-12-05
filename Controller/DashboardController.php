@@ -11,9 +11,9 @@
 
 namespace Wucdbm\Bundle\BannerBundle\Controller;
 
-use Wucdbm\Bundle\WucdbmBundle\Controller\BaseController;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class DashboardController extends BaseController {
+class DashboardController extends Controller {
 
     public function dashboardAction() {
         return $this->render('@WucdbmBanner/Dashboard/dashboard.html.twig');

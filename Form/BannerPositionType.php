@@ -13,15 +13,9 @@ use Wucdbm\Bundle\BannerBundle\Manager\BannerManager;
 
 class BannerPositionType extends AbstractType {
 
-    /**
-     * @var BannerManager
-     */
+    /** @var BannerManager */
     protected $manager;
 
-    /**
-     * BannerPositionType constructor.
-     * @param BannerManager $manager
-     */
     public function __construct(BannerManager $manager) {
         $this->manager = $manager;
     }

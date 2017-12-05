@@ -5,7 +5,7 @@ namespace Wucdbm\Bundle\BannerBundle\Form;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Wucdbm\Bundle\BannerBundle\Filter\BannerPositionChoiceFilter;
-use Wucdbm\Bundle\WucdbmBundle\Form\Filter\BaseFilterType;
+use Wucdbm\Bundle\QuickUIBundle\Form\Filter\BaseFilterType;
 
 class BannerPositionChoiceFilterType extends BaseFilterType {
 
@@ -15,10 +15,10 @@ class BannerPositionChoiceFilterType extends BaseFilterType {
      */
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
-            ->add('id', 'Wucdbm\Bundle\WucdbmBundle\Form\Filter\TextFilterType', [
+            ->add('id', 'Wucdbm\Bundle\QuickUIBundle\Form\Filter\TextFilterType', [
                 'placeholder' => 'ID'
             ])
-            ->add('bannerStatus', 'Wucdbm\Bundle\WucdbmBundle\Form\Filter\ChoiceFilterType', [
+            ->add('bannerStatus', 'Wucdbm\Bundle\QuickUIBundle\Form\Filter\ChoiceFilterType', [
                 'choices'     => [
                     'With Banner'    => BannerPositionChoiceFilter::BANNER_STATUS_HAS_BANNER,
                     'Without Banner' => BannerPositionChoiceFilter::BANNER_STATUS_DOES_NOT_HAVE_BANNER

@@ -1,23 +1,44 @@
 <?php
 
+/*
+ * This file is part of the BannerBundle package.
+ *
+ * (c) Martin Kirilov <wucdbm@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Wucdbm\Bundle\BannerBundle\Controller;
 
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Wucdbm\Bundle\BannerBundle\Entity\Banner;
 use Wucdbm\Bundle\BannerBundle\Filter\BannerFilter;
 use Wucdbm\Bundle\BannerBundle\Form\BannerFilterType;
 use Wucdbm\Bundle\BannerBundle\Form\BannerType;
-use Wucdbm\Bundle\WucdbmBundle\Controller\BaseController;
+use Wucdbm\Bundle\BannerBundle\Manager\BannerManager;
+use Wucdbm\Bundle\BannerBundle\Repository\BannerRepository;
 
-class BannerController extends BaseController {
+class BannerController extends Controller {
+
+    /** @var BannerManager */
+    protected $bannerManager;
+
+    /** @var BannerRepository */
+    protected $bannerRepo;
+
+    public function __construct(BannerManager $bannerManager, BannerRepository $bannerRepo) {
+        $this->bannerManager = $bannerManager;
+        $this->bannerRepo = $bannerRepo;
+    }
 
     public function listAction(Request $request) {
-        $repo = $this->get('wucdbm_banner.repo.banners');
         $filter = new BannerFilter();
         $pagination = $filter->getPagination()->enable();
         $filterForm = $this->createForm(BannerFilterType::class, $filter);
         $filter->load($request, $filterForm);
-        $banners = $repo->filter($filter);
+        $banners = $this->bannerRepo->filter($filter);
         $data = [
             'banners'    => $banners,
             'filter'     => $filter,
@@ -43,8 +64,7 @@ class BannerController extends BaseController {
             ]);
         }
 
-        $manager = $this->container->get('wucdbm_banner.manager.banners');
-        $manager->removeBanner($banner);
+        $this->bannerManager->removeBanner($banner);
 
         return $this->json([
             'success' => true,
@@ -65,8 +85,7 @@ class BannerController extends BaseController {
 
     protected function activity(Banner $banner, $boolean) {
         $banner->setIsActive($boolean);
-        $manager = $this->container->get('wucdbm_banner.manager.banners');
-        $manager->saveBanner($banner);
+        $this->bannerManager->saveBanner($banner);
 
         return $this->json([
             'success' => true,
@@ -80,7 +99,9 @@ class BannerController extends BaseController {
         ];
 
         if ($request->isXmlHttpRequest()) {
-            return $this->mfp($this->renderView('@WucdbmBanner/Banner/preview/preview_mfp.html.twig', $data));
+            return $this->json([
+                'mfp' => $this->renderView('@WucdbmBanner/Banner/preview/preview_mfp.html.twig', $data)
+            ]);
         }
 
         return $this->render('@WucdbmBanner/Banner/preview/preview.html.twig', $data);
@@ -92,8 +113,7 @@ class BannerController extends BaseController {
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $manager = $this->container->get('wucdbm_banner.manager.banners');
-            $manager->saveBanner($banner);
+            $this->bannerManager->saveBanner($banner);
         }
 
         $data = [
@@ -115,8 +135,7 @@ class BannerController extends BaseController {
                 $banner->setContent('');
             }
 
-            $manager = $this->container->get('wucdbm_banner.manager.banners');
-            $manager->saveBanner($banner);
+            $this->bannerManager->saveBanner($banner);
 
             return $this->redirectToRoute('wucdbm_banner_banner_edit', [
                 'id' => $banner->getId()

@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the BannerBundle package.
+ *
+ * (c) Martin Kirilov <wucdbm@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Wucdbm\Bundle\BannerBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
@@ -16,6 +25,9 @@ class Configuration implements ConfigurationInterface {
 //                ->scalarNode('show_positions_parameter')
 //                    ->defaultValue('showpositions')
 //                ->end()
+                ->scalarNode('entity_manager_name')
+                    ->defaultValue('default')
+                ->end()
             ->end();
 
         return $treeBuilder;

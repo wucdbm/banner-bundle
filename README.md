@@ -1,11 +1,5 @@
 # banner-bundle
 
-## TODO
-
-- Maybe port the simple banner generator over to this bundle?
-- View positions parameter with default config
-- Admin role config
-
 ## Usage
 
 Having properly configured uglifycss and uglifyjs is a requirement for production.
@@ -27,9 +21,9 @@ wucdbm_banner:
 
 You can create a link to the builder using `{{ path('wucdbm_banner_dashboard') }}`, or embed it into your admin UI via an iframe like so `<iframe src="{{ path('wucdbm_banner_dashboard') }}" style="border: 0; width: 100%; height: 100%;"></iframe>`
 
-The User Interface is pretty self-explanatory. 
+The User Interface is pretty self-explanatory.
 You create banners and positions.
-Banners contain the JavaScript or HTML code. 
+Banners contain the JavaScript or HTML code.
 This can also be used for tracking or anything external you would like to add to your website via a UI in your admin section without thinking too much about its implementation.
 Positions are placed in your code on your pages, like this `{{ 'YourPositionName'|banner }}` (There is also a twig function)
 You can also print a link to the same page you're at, but with positions in debug mode, but only if your user has the `ROLE_ADMIN` role using `{{ showBannerPositionsUrl() }}`
@@ -38,7 +32,7 @@ If a position is lacking a banner, is inactive, the banner is inactive, or any o
 
 ## Caching
 
-If you need cache: Alias your own `Wucdbm\Bundle\WucdbmBundle\Cache\Storage\AbstractStorage` to `wucdbm_banner.cache.persistent`, for example:
+If you need cache: Alias your own `Psr\Cache\CacheItemPoolInterface` to `wucdbm_banner.cache`, for example:
 
-`<service id="wucdbm_banner.cache.persistent" alias="app.cache" />` where the `app.cache` service is an instance of `Wucdbm\Bundle\WucdbmBundle\Cache\Storage\AbstractStorage`
+`<service id="wucdbm_banner.cache" alias="app.cache" />` where the `app.cache` service is an instance of `Psr\Cache\CacheItemPoolInterface`
 

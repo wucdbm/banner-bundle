@@ -1,6 +1,6 @@
 wucdbm_banner_dashboard:
     path:        /
-    defaults:    { _controller: WucdbmBannerBundle:Dashboard:dashboard }
+    defaults:    { _controller: Wucdbm\Bundle\BannerBundle\Controller\DashboardController::dashboardAction }
 
 wucdbm_banner_banner:
     resource: routing/banner.yml

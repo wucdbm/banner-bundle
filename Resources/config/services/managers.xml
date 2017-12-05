@@ -4,15 +4,13 @@
 
     <services>
 
-        <service id="wucdbm_banner.cache.persistent" class="Wucdbm\Bundle\WucdbmBundle\Cache\Storage\ArrayStorage" shared="false" public="false"/>
+        <service id="wucdbm_banner.cache" class="Symfony\Component\Cache\Adapter\ArrayAdapter" shared="false"/>
 
-        <service id="wucdbm_banner.manager.abstract" parent="wucdbm.manager.abstract">
-            <call method="setCache">
-                <argument type="service" id="wucdbm_banner.cache.persistent"/>
-            </call>
+        <service id="Wucdbm\Bundle\BannerBundle\Manager\BannerManager">
+            <argument type="service" id="Wucdbm\Bundle\BannerBundle\Repository\BannerRepository"/>
+            <argument type="service" id="Wucdbm\Bundle\BannerBundle\Repository\BannerPositionRepository"/>
+            <argument type="service" id="wucdbm_banner.cache"/>
         </service>
-
-        <service id="wucdbm_banner.manager.banners" class="Wucdbm\Bundle\BannerBundle\Manager\BannerManager" parent="wucdbm_banner.manager.abstract"/>
 
     </services>
 </container>

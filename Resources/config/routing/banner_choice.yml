@@ -1,7 +1,7 @@
 wucdbm_banner_choice_choose:
       path:      /positions/choose
-      defaults:  { _controller: WucdbmBannerBundle:BannerChoice:choose }
+      defaults:  { _controller: Wucdbm\Bundle\BannerBundle\Controller\BannerChoiceController::chooseAction }
 
 wucdbm_banner_choice_update_banner:
       path:      /positions/{id}/update/banner
-      defaults:  { _controller: WucdbmBannerBundle:BannerChoice:updatePositionBanner }
+      defaults:  { _controller: Wucdbm\Bundle\BannerBundle\Controller\BannerChoiceController::updatePositionBannerAction }

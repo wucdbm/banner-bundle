@@ -2,16 +2,19 @@
 
 namespace Wucdbm\Bundle\BannerBundle\Repository;
 
+use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\NoResultException;
 use Wucdbm\Bundle\BannerBundle\Entity\Banner;
 use Wucdbm\Bundle\BannerBundle\Filter\BannerFilter;
-use Doctrine\ORM\NoResultException;
-use Wucdbm\Bundle\WucdbmBundle\Repository\AbstractRepository;
+use Wucdbm\Bundle\QuickUIBundle\Repository\QuickUIRepositoryTrait;
 
-class BannerRepository extends AbstractRepository {
+class BannerRepository extends EntityRepository {
+
+    use QuickUIRepositoryTrait;
 
     public function filter(BannerFilter $filter) {
         $builder = $this->createQueryBuilder('banners')
-                        ->select('banners');
+            ->select('banners');
 
         if ($filter->getId()) {
             $builder->andWhere('banners.id = :id')
@@ -33,22 +36,24 @@ class BannerRepository extends AbstractRepository {
 
     public function getActiveBanners() {
         $builder = $this->createQueryBuilder('b')
-                        ->where('b.isActive = :active')
-                        ->setParameter('active', 1);
+            ->where('b.isActive = :active')
+            ->setParameter('active', 1);
+
         return $builder;
     }
-    
+
     public function findOneById($id) {
         $q = $this->createQueryBuilder('banners')
-                  ->select('banners')
-                  ->where('banners.id = :id')
-                  ->setParameter('id', $id)
-                  ->getQuery();
+            ->select('banners')
+            ->where('banners.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery();
         try {
             $banner = $q->getSingleResult();
         } catch (NoResultException $e) {
             return null;
         }
+
         return $banner;
     }
 

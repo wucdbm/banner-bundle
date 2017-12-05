@@ -3,7 +3,7 @@
 namespace Wucdbm\Bundle\BannerBundle\Filter;
 
 use Wucdbm\Bundle\BannerBundle\Entity\BannerPositionType;
-use Wucdbm\Bundle\WucdbmBundle\Filter\AbstractFilter;
+use Wucdbm\Bundle\QuickUIBundle\Filter\AbstractFilter;
 
 class BannerPositionChoiceFilter extends AbstractFilter {
 

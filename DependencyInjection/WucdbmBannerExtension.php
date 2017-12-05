@@ -30,12 +30,9 @@ class WucdbmBannerExtension extends Extension {
         $bag = $container->getParameterBag();
 
         $bag->set('wucdbm_banner.config', $config);
+        $bag->set('wucdbm_banner.config.entity_manager_name', $config['entity_manager_name']);
 
-        $loader->load('services/core.xml');
-        $loader->load('services/forms.xml');
-        $loader->load('services/managers.xml');
-        $loader->load('services/repositories.xml');
-        $loader->load('services/twig.xml');
+        $loader->load('services.xml');
     }
 
     public function getXsdValidationBasePath() {

@@ -1,17 +1,14 @@
-{% javascripts filter='?uglifyjs2' output='js/wucdbm-menu-builder.js'
-'@WucdbmBannerBundle/Resources/public/jquery-2.1.4.min.js'
-'@WucdbmBannerBundle/Resources/public/bootstrap/js/bootstrap.min.js'
-'@WucdbmBannerBundle/Resources/public/jquery.witter/jquery.witter.js'
-'@WucdbmBannerBundle/Resources/public/magnificPopup/js/jquery.magnificPopup.js'
-'@WucdbmBannerBundle/Resources/public/js/jquery.ajaxHandler.js'
-'@WucdbmBannerBundle/Resources/public/js/jquery.ajaxPopover.js'
-'@WucdbmBannerBundle/Resources/public/js/jquery.autosize.min.js'
-'@WucdbmBannerBundle/Resources/public/js/jquery.blockui.min.js'
-'@WucdbmBannerBundle/Resources/public/js/bootbox.min.js'
-'@WucdbmBannerBundle/Resources/public/bootstrap-editable/js/bootstrap-editable.js'
-'@WucdbmBannerBundle/Resources/public/bootstrap-editable/js/address.js'
-'@WucdbmBannerBundle/Resources/public/bootstrap-editable/js/wysihtml5.js'
-'@WucdbmBannerBundle/Resources/public/js/scripts.js'
-'@WucdbmBannerBundle/Resources/public/select2/js/select2.full.min.js' -%}
-<script src="{{ asset_url }}" type="text/javascript"></script>
-{% endjavascripts -%}
+<script src="{{ preload(asset('bundles/wucdbmbanner/jquery-2.1.4.min.js'), { as: 'script' }) }}"></script>
+<script src="{{ preload(asset('bundles/wucdbmbanner/bootstrap/js/bootstrap.min.js'), { as: 'script' }) }}"></script>
+<script src="{{ preload(asset('bundles/wucdbmbanner/jquery.witter/jquery.witter.js'), { as: 'script' }) }}"></script>
+<script src="{{ preload(asset('bundles/wucdbmbanner/magnificPopup/js/jquery.magnificPopup.js'), { as: 'script' }) }}"></script>
+<script src="{{ preload(asset('bundles/wucdbmbanner/js/jquery.ajaxHandler.js'), { as: 'script' }) }}"></script>
+<script src="{{ preload(asset('bundles/wucdbmbanner/js/jquery.ajaxPopover.js'), { as: 'script' }) }}"></script>
+<script src="{{ preload(asset('bundles/wucdbmbanner/js/jquery.autosize.min.js'), { as: 'script' }) }}"></script>
+<script src="{{ preload(asset('bundles/wucdbmbanner/js/jquery.blockui.min.js'), { as: 'script' }) }}"></script>
+<script src="{{ preload(asset('bundles/wucdbmbanner/js/bootbox.min.js'), { as: 'script' }) }}"></script>
+<script src="{{ preload(asset('bundles/wucdbmbanner/bootstrap-editable/js/bootstrap-editable.js'), { as: 'script' }) }}"></script>
+<script src="{{ preload(asset('bundles/wucdbmbanner/bootstrap-editable/js/address.js'), { as: 'script' }) }}"></script>
+<script src="{{ preload(asset('bundles/wucdbmbanner/bootstrap-editable/js/wysihtml5.js'), { as: 'script' }) }}"></script>
+<script src="{{ preload(asset('bundles/wucdbmbanner/js/scripts.js'), { as: 'script' }) }}"></script>
+<script src="{{ preload(asset('bundles/wucdbmbanner/select2/js/select2.full.min.js'), { as: 'script' }) }}"></script>

@@ -1,23 +1,44 @@
 <?php
 
+/*
+ * This file is part of the BannerBundle package.
+ *
+ * (c) Martin Kirilov <wucdbm@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Wucdbm\Bundle\BannerBundle\Controller;
 
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Wucdbm\Bundle\BannerBundle\Entity\BannerPosition;
 use Wucdbm\Bundle\BannerBundle\Filter\BannerPositionFilter;
 use Wucdbm\Bundle\BannerBundle\Form\BannerPositionFilterType;
 use Wucdbm\Bundle\BannerBundle\Form\BannerPositionType;
-use Wucdbm\Bundle\WucdbmBundle\Controller\BaseController;
+use Wucdbm\Bundle\BannerBundle\Manager\BannerManager;
+use Wucdbm\Bundle\BannerBundle\Repository\BannerPositionRepository;
 
-class BannerPositionController extends BaseController {
+class BannerPositionController extends Controller {
+
+    /** @var BannerManager */
+    protected $bannerManager;
+
+    /** @var BannerPositionRepository */
+    protected $bannerPositionRepo;
+
+    public function __construct(BannerManager $bannerManager, BannerPositionRepository $bannerPositionRepo) {
+        $this->bannerManager = $bannerManager;
+        $this->bannerPositionRepo = $bannerPositionRepo;
+    }
 
     public function listAction(Request $request) {
-        $repo = $this->get('wucdbm_banner.repo.banner_positions');
         $filter = new BannerPositionFilter();
         $pagination = $filter->getPagination()->enable();
         $filterForm = $this->createForm(BannerPositionFilterType::class, $filter);
         $filter->load($request, $filterForm);
-        $positions = $repo->filter($filter);
+        $positions = $this->bannerPositionRepo->filter($filter);
         $data = [
             'positions'  => $positions,
             'filter'     => $filter,
@@ -47,8 +68,7 @@ class BannerPositionController extends BaseController {
     protected function activity(BannerPosition $position, $boolean) {
         $position->setIsActive($boolean);
 
-        $manager = $this->container->get('wucdbm_banner.manager.banners');
-        $manager->savePosition($position);
+        $this->bannerManager->savePosition($position);
 
         return $this->json([
             'success' => true,
@@ -62,8 +82,7 @@ class BannerPositionController extends BaseController {
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $manager = $this->container->get('wucdbm_banner.manager.banners');
-            $manager->savePosition($position);
+            $this->bannerManager->savePosition($position);
         }
 
         $data = [
@@ -85,8 +104,7 @@ class BannerPositionController extends BaseController {
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $manager = $this->container->get('wucdbm_banner.manager.banners');
-            $manager->savePosition($position);
+            $this->bannerManager->savePosition($position);
 
             return $this->redirectToRoute('wucdbm_banner_position_edit', [
                 'id' => $position->getId()
@@ -107,8 +125,7 @@ class BannerPositionController extends BaseController {
             ]);
         }
 
-        $manager = $this->container->get('wucdbm_banner.manager.banners');
-        $manager->removePosition($position);
+        $this->bannerManager->removePosition($position);
 
         return $this->json([
             'success' => true,

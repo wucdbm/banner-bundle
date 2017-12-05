@@ -2,7 +2,7 @@
 
 namespace Wucdbm\Bundle\BannerBundle\Filter;
 
-use Wucdbm\Bundle\WucdbmBundle\Filter\AbstractFilter;
+use Wucdbm\Bundle\QuickUIBundle\Filter\AbstractFilter;
 
 class BannerFilter extends AbstractFilter {
 

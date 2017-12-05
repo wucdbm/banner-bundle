@@ -1,15 +1,37 @@
 <?php
 
+/*
+ * This file is part of the BannerBundle package.
+ *
+ * (c) Martin Kirilov <wucdbm@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Wucdbm\Bundle\BannerBundle\Controller;
 
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Wucdbm\Bundle\BannerBundle\Entity\BannerPosition;
 use Wucdbm\Bundle\BannerBundle\Filter\BannerPositionChoiceFilter;
 use Wucdbm\Bundle\BannerBundle\Form\BannerPositionChoiceFilterType;
 use Wucdbm\Bundle\BannerBundle\Form\BannerPositionChooseType;
-use Wucdbm\Bundle\WucdbmBundle\Controller\BaseController;
+use Wucdbm\Bundle\BannerBundle\Manager\BannerManager;
+use Wucdbm\Bundle\BannerBundle\Repository\BannerPositionRepository;
 
-class BannerChoiceController extends BaseController {
+class BannerChoiceController extends Controller {
+
+    /** @var BannerManager */
+    protected $bannerManager;
+
+    /** @var BannerPositionRepository */
+    protected $bannerPositionRepo;
+
+    public function __construct(BannerManager $bannerManager, BannerPositionRepository $bannerPositionRepo) {
+        $this->bannerManager = $bannerManager;
+        $this->bannerPositionRepo = $bannerPositionRepo;
+    }
 
     public function chooseAction(Request $request) {
         $filter = new BannerPositionChoiceFilter();
@@ -17,9 +39,8 @@ class BannerChoiceController extends BaseController {
         $filter->loadFromRequest($request);
         $filterForm = $this->createForm(BannerPositionChoiceFilterType::class, $filter);
         $filter->load($request, $filterForm);
-        $repo = $this->get('wucdbm_banner.repo.banner_positions');
 
-        $positions = $repo->filterForChoose($filter);
+        $positions = $this->bannerPositionRepo->filterForChoose($filter);
 
         $forms = [];
         /** @var BannerPosition $position */
@@ -50,8 +71,7 @@ class BannerChoiceController extends BaseController {
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $manager = $this->container->get('wucdbm_banner.manager.banners');
-            $manager->savePosition($position);
+            $this->bannerManager->savePosition($position);
 
             $banner = $position->getBanner();
 

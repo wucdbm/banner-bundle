@@ -9,24 +9,16 @@ use Wucdbm\Bundle\BannerBundle\Manager\BannerManager;
 
 class BannerExtension extends \Twig_Extension {
 
-    /**
-     * @var BannerManager
-     */
+    /** @var BannerManager */
     protected $manager;
 
-    /**
-     * @var \Twig_Environment
-     */
+    /** @var \Twig_Environment */
     protected $twig;
 
-    /**
-     * @var ContainerInterface
-     */
+    /** @var ContainerInterface */
     protected $container;
 
-    /**
-     * @var BannerCollection
-     */
+    /** @var BannerCollection */
     protected $collection = null;
 
     public function __construct(BannerManager $manager, \Twig_Environment $twig, ContainerInterface $container) {
@@ -56,7 +48,7 @@ class BannerExtension extends \Twig_Extension {
         ];
     }
 
-    public function banner($name) {
+    public function banner($name): string {
         $collection = $this->getCollection();
         if ($collection->has($name)) {
             $position = $collection->get($name);
@@ -70,24 +62,28 @@ class BannerExtension extends \Twig_Extension {
 
                         return $this->twig->render('@WucdbmBanner/Banner/render/banner.html.twig', $data);
                     }
+
                     $data = [
                         'position' => $collection->get($name)
                     ];
 
                     return $this->twig->render('@WucdbmBanner/Banner/render/warning_banner_inactive.html.twig', $data);
                 }
+
                 $data = [
                     'position' => $collection->get($name)
                 ];
 
                 return $this->twig->render('@WucdbmBanner/Banner/render/warning_no_banner.html.twig', $data);
             }
+
             $data = [
                 'name' => $name
             ];
 
             return $this->twig->render('@WucdbmBanner/Banner/render/wraning_position_inactive.html.twig', $data);
         }
+
         $data = [
             'name' => $name
         ];
@@ -95,7 +91,7 @@ class BannerExtension extends \Twig_Extension {
         return $this->twig->render('@WucdbmBanner/Banner/render/wraning_no_position.html.twig', $data);
     }
 
-    public function showBannerPositionsUrl() {
+    public function showBannerPositionsUrl(): string {
         $stack = $this->container->get('request_stack');
         $request = $stack->getCurrentRequest();
         if ($request) {
@@ -111,10 +107,7 @@ class BannerExtension extends \Twig_Extension {
         return '';
     }
 
-    /**
-     * @return BannerCollection
-     */
-    protected function getCollection() {
+    protected function getCollection(): BannerCollection {
         if (null === $this->collection) {
             $this->collection = $this->manager->getBanners();
         }
@@ -122,11 +115,4 @@ class BannerExtension extends \Twig_Extension {
         return $this->collection;
     }
 
-    public function getName() {
-        return 'app_banner';
-    }
-
-    public function getAlias() {
-        return 'app_banner';
-    }
 }

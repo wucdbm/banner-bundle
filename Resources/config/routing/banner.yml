@@ -1,31 +1,31 @@
 wucdbm_banner_banner_list:
       path:      /list
-      defaults:  { _controller: WucdbmBannerBundle:Banner:list }
+      defaults:  { _controller: Wucdbm\Bundle\BannerBundle\Controller\BannerController::listAction }
 
 wucdbm_banner_banner_edit:
       path:      /{id}/edit
-      defaults:  { _controller: WucdbmBannerBundle:Banner:edit }
+      defaults:  { _controller: Wucdbm\Bundle\BannerBundle\Controller\BannerController::editAction }
 
 wucdbm_banner_banner_create:
       path:      /new
-      defaults:  { _controller: WucdbmBannerBundle:Banner:create }
+      defaults:  { _controller: Wucdbm\Bundle\BannerBundle\Controller\BannerController::createAction }
 
 wucdbm_banner_banner_preview:
       path:      /{id}/preview
-      defaults:  { _controller: WucdbmBannerBundle:Banner:preview }
+      defaults:  { _controller: Wucdbm\Bundle\BannerBundle\Controller\BannerController::previewAction }
 
 wucdbm_banner_banner_activate:
       path:      /{id}/activate
-      defaults:  { _controller: WucdbmBannerBundle:Banner:activate }
+      defaults:  { _controller: Wucdbm\Bundle\BannerBundle\Controller\BannerController::activateAction }
 
 wucdbm_banner_banner_deactivate:
       path:      /{id}/deactivate
-      defaults:  { _controller: WucdbmBannerBundle:Banner:deactivate }
+      defaults:  { _controller: Wucdbm\Bundle\BannerBundle\Controller\BannerController::deactivateAction }
 
 wucdbm_banner_banner_refresh:
       path:      /{id}/refresh
-      defaults:  { _controller: WucdbmBannerBundle:Banner:refresh }
+      defaults:  { _controller: Wucdbm\Bundle\BannerBundle\Controller\BannerController::refreshAction }
 
 wucdbm_banner_banner_delete:
       path:      /{id}/delete
-      defaults:  { _controller: WucdbmBannerBundle:Banner:delete }
+      defaults:  { _controller: Wucdbm\Bundle\BannerBundle\Controller\BannerController::deleteAction }

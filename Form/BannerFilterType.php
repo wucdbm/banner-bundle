@@ -5,7 +5,7 @@ namespace Wucdbm\Bundle\BannerBundle\Form;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Wucdbm\Bundle\BannerBundle\Filter\BannerFilter;
-use Wucdbm\Bundle\WucdbmBundle\Form\Filter\BaseFilterType;
+use Wucdbm\Bundle\QuickUIBundle\Form\Filter\BaseFilterType;
 
 class BannerFilterType extends BaseFilterType {
 
@@ -15,17 +15,17 @@ class BannerFilterType extends BaseFilterType {
      */
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
-            ->add('isActive', 'Wucdbm\Bundle\WucdbmBundle\Form\Filter\ChoiceFilterType', [
+            ->add('isActive', 'Wucdbm\Bundle\QuickUIBundle\Form\Filter\ChoiceFilterType', [
                 'placeholder' => 'Status',
                 'choices'     => [
                     'Active'   => BannerFilter::IS_ACTIVE_TRUE,
                     'Inactive' => BannerFilter::IS_ACTIVE_FALSE
                 ]
             ])
-            ->add('id', 'Wucdbm\Bundle\WucdbmBundle\Form\Filter\TextFilterType', [
+            ->add('id', 'Wucdbm\Bundle\QuickUIBundle\Form\Filter\TextFilterType', [
                 'placeholder' => 'ID'
             ])
-            ->add('name', 'Wucdbm\Bundle\WucdbmBundle\Form\Filter\TextFilterType', [
+            ->add('name', 'Wucdbm\Bundle\QuickUIBundle\Form\Filter\TextFilterType', [
                 'placeholder' => 'Name'
             ]);
     }
