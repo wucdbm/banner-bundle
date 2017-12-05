@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the BannerBundle package.
+ *
+ * (c) Martin Kirilov <wucdbm@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Wucdbm\Bundle\BannerBundle;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -13,5 +22,4 @@ class WucdbmBannerBundle extends Bundle {
 
         $container->addCompilerPass(new EntityManagerCompiler());
     }
-
 }
