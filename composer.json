@@ -26,5 +26,8 @@
             "Wucdbm\\Bundle\\BannerBundle\\": "src"
         }
     },
+    "config": {
+        "bin-dir": "bin"
+    },
     "license": "GPL-3.0"
 }
