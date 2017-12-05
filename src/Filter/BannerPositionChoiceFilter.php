@@ -1,22 +1,30 @@
 <?php
 
+/*
+ * This file is part of the BannerBundle package.
+ *
+ * (c) Martin Kirilov <wucdbm@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Wucdbm\Bundle\BannerBundle\Filter;
 
-use Wucdbm\Bundle\BannerBundle\Entity\BannerPositionType;
 use Wucdbm\Bundle\QuickUIBundle\Filter\AbstractFilter;
 
 class BannerPositionChoiceFilter extends AbstractFilter {
 
-    const BANNER_STATUS_HAS_BANNER = 1,
-        BANNER_STATUS_DOES_NOT_HAVE_BANNER = 2;
+    const BANNER_STATUS_HAS_BANNER = 1;
+    const BANNER_STATUS_DOES_NOT_HAVE_BANNER = 2;
 
     /**
-     * @var integer
+     * @var int
      */
     protected $id;
 
     /**
-     * @var integer
+     * @var int
      */
     protected $bannerStatus;
 
@@ -47,5 +55,4 @@ class BannerPositionChoiceFilter extends AbstractFilter {
     public function setBannerStatus($bannerStatus) {
         $this->bannerStatus = $bannerStatus;
     }
-    
 }

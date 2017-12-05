@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the BannerBundle package.
+ *
+ * (c) Martin Kirilov <wucdbm@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Wucdbm\Bundle\BannerBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
@@ -16,6 +25,7 @@ class BannerPositionRepository extends EntityRepository {
      * @param $name
      *
      * @return BannerPosition|null
+     *
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
     public function findOneByName($name) {

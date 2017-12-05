@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the BannerBundle package.
+ *
+ * (c) Martin Kirilov <wucdbm@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Wucdbm\Bundle\BannerBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
@@ -11,22 +20,22 @@ class BannerPositionChooseType extends AbstractType {
 
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
             ->add('banner', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', [
-                'class'         => 'Wucdbm\Bundle\BannerBundle\Entity\Banner',
+                'class' => 'Wucdbm\Bundle\BannerBundle\Entity\Banner',
                 'query_builder' => function (BannerRepository $repo) {
                     return $repo->getActiveBanners();
                 },
-                'choice_label'  => 'name',
-                'placeholder'   => 'Choose Banner',
-                'empty_data'    => null,
-                'attr'          => [
-                    'class' => 'select2'
+                'choice_label' => 'name',
+                'placeholder' => 'Choose Banner',
+                'empty_data' => null,
+                'attr' => [
+                    'class' => 'select2',
                 ],
-                'label'         => 'Банер'
+                'label' => 'Банер',
             ]);
     }
 
@@ -35,8 +44,8 @@ class BannerPositionChooseType extends AbstractType {
      */
     public function configureOptions(OptionsResolver $resolver) {
         $resolver->setDefaults([
-            'data_class'      => 'Wucdbm\Bundle\BannerBundle\Entity\BannerPosition',
-            'csrf_protection' => false
+            'data_class' => 'Wucdbm\Bundle\BannerBundle\Entity\BannerPosition',
+            'csrf_protection' => false,
         ]);
     }
 }

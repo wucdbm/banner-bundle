@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the BannerBundle package.
+ *
+ * (c) Martin Kirilov <wucdbm@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Wucdbm\Bundle\BannerBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
@@ -22,7 +31,7 @@ class BannerPositionType extends AbstractType {
 
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $callback = function ($object, ExecutionContextInterface $context) use ($builder) {
@@ -38,38 +47,38 @@ class BannerPositionType extends AbstractType {
         };
         $builder
             ->add('name', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
-                'label'       => 'Name',
-                'attr'        => [
-                    'placeholder' => 'Name'
+                'label' => 'Name',
+                'attr' => [
+                    'placeholder' => 'Name',
                 ],
                 'constraints' => [
                     new NotBlank(),
                     new Callback([
-                        'callback' => $callback
-                    ])
-                ]
+                        'callback' => $callback,
+                    ]),
+                ],
             ])
             ->add('description', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
-                'label'       => 'Position description',
-                'attr'        => [
-                    'placeholder' => 'Position description'
+                'label' => 'Position description',
+                'attr' => [
+                    'placeholder' => 'Position description',
                 ],
                 'constraints' => [
-                    new NotBlank()
-                ]
+                    new NotBlank(),
+                ],
             ])
             ->add('banner', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', [
-                'class'        => 'Wucdbm\Bundle\BannerBundle\Entity\Banner',
+                'class' => 'Wucdbm\Bundle\BannerBundle\Entity\Banner',
                 'choice_label' => 'name',
-                'placeholder'  => 'Banner',
-                'attr'         => [
-                    'class' => 'select2'
+                'placeholder' => 'Banner',
+                'attr' => [
+                    'class' => 'select2',
                 ],
-                'required'     => false
+                'required' => false,
             ])
             ->add('isActive', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType', [
-                'label'    => 'Active',
-                'required' => false
+                'label' => 'Active',
+                'required' => false,
             ]);
     }
 
@@ -78,8 +87,7 @@ class BannerPositionType extends AbstractType {
      */
     public function configureOptions(OptionsResolver $resolver) {
         $resolver->setDefaults([
-            'data_class' => 'Wucdbm\Bundle\BannerBundle\Entity\BannerPosition'
+            'data_class' => 'Wucdbm\Bundle\BannerBundle\Entity\BannerPosition',
         ]);
     }
-
 }

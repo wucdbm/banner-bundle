@@ -40,10 +40,10 @@ class BannerPositionController extends Controller {
         $filter->load($request, $filterForm);
         $positions = $this->bannerPositionRepo->filter($filter);
         $data = [
-            'positions'  => $positions,
-            'filter'     => $filter,
+            'positions' => $positions,
+            'filter' => $filter,
             'pagination' => $pagination,
-            'filterForm' => $filterForm->createView()
+            'filterForm' => $filterForm->createView(),
         ];
 
         return $this->render('@WucdbmBanner/BannerPosition/list.html.twig', $data);
@@ -51,7 +51,7 @@ class BannerPositionController extends Controller {
 
     public function refreshAction(BannerPosition $position) {
         $data = [
-            'position' => $position
+            'position' => $position,
         ];
 
         return $this->render('@WucdbmBanner/BannerPosition/list_row.html.twig', $data);
@@ -72,7 +72,7 @@ class BannerPositionController extends Controller {
 
         return $this->json([
             'success' => true,
-            'refresh' => true
+            'refresh' => true,
         ]);
     }
 
@@ -87,7 +87,7 @@ class BannerPositionController extends Controller {
 
         $data = [
             'position' => $position,
-            'form'     => $form->createView()
+            'form' => $form->createView(),
         ];
 
         return $this->render('@WucdbmBanner/BannerPosition/edit.html.twig', $data);
@@ -107,12 +107,12 @@ class BannerPositionController extends Controller {
             $this->bannerManager->savePosition($position);
 
             return $this->redirectToRoute('wucdbm_banner_position_edit', [
-                'id' => $position->getId()
+                'id' => $position->getId(),
             ]);
         }
 
         $data = [
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ];
 
         return $this->render('@WucdbmBanner/BannerPosition/create.html.twig', $data);
@@ -121,7 +121,7 @@ class BannerPositionController extends Controller {
     public function deleteAction(BannerPosition $position, Request $request) {
         if (!$request->request->get('is_confirmed')) {
             return $this->json([
-                'success' => false
+                'success' => false,
             ]);
         }
 
@@ -129,11 +129,10 @@ class BannerPositionController extends Controller {
 
         return $this->json([
             'success' => true,
-            'remove'  => true,
-            'witter'  => [
-                'text' => 'Position deleted'
-            ]
+            'remove' => true,
+            'witter' => [
+                'text' => 'Position deleted',
+            ],
         ]);
     }
-
 }

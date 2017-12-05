@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the BannerBundle package.
+ *
+ * (c) Martin Kirilov <wucdbm@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Wucdbm\Bundle\BannerBundle\Manager;
 
 use Psr\Cache\CacheItemPoolInterface;
@@ -115,5 +124,4 @@ class BannerManager {
     public function getPositionByName($name): ?BannerPosition {
         return $this->bannerPositionRepo->findOneByName($name);
     }
-
 }

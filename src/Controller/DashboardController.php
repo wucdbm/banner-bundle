@@ -18,5 +18,4 @@ class DashboardController extends Controller {
     public function dashboardAction() {
         return $this->render('@WucdbmBanner/Dashboard/dashboard.html.twig');
     }
-
 }

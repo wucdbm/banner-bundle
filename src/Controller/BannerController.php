@@ -40,10 +40,10 @@ class BannerController extends Controller {
         $filter->load($request, $filterForm);
         $banners = $this->bannerRepo->filter($filter);
         $data = [
-            'banners'    => $banners,
-            'filter'     => $filter,
+            'banners' => $banners,
+            'filter' => $filter,
             'pagination' => $pagination,
-            'filterForm' => $filterForm->createView()
+            'filterForm' => $filterForm->createView(),
         ];
 
         return $this->render('@WucdbmBanner/Banner/list.html.twig', $data);
@@ -51,7 +51,7 @@ class BannerController extends Controller {
 
     public function refreshAction(Banner $banner) {
         $data = [
-            'banner' => $banner
+            'banner' => $banner,
         ];
 
         return $this->render('@WucdbmBanner/Banner/list_row.html.twig', $data);
@@ -60,7 +60,7 @@ class BannerController extends Controller {
     public function deleteAction(Banner $banner, Request $request) {
         if (!$request->request->get('is_confirmed')) {
             return $this->json([
-                'success' => false
+                'success' => false,
             ]);
         }
 
@@ -68,10 +68,10 @@ class BannerController extends Controller {
 
         return $this->json([
             'success' => true,
-            'remove'  => true,
-            'witter'  => [
-                'text' => 'Banner deleted'
-            ]
+            'remove' => true,
+            'witter' => [
+                'text' => 'Banner deleted',
+            ],
         ]);
     }
 
@@ -89,18 +89,18 @@ class BannerController extends Controller {
 
         return $this->json([
             'success' => true,
-            'refresh' => true
+            'refresh' => true,
         ]);
     }
 
     public function previewAction(Banner $banner, Request $request) {
         $data = [
-            'banner' => $banner
+            'banner' => $banner,
         ];
 
         if ($request->isXmlHttpRequest()) {
             return $this->json([
-                'mfp' => $this->renderView('@WucdbmBanner/Banner/preview/preview_mfp.html.twig', $data)
+                'mfp' => $this->renderView('@WucdbmBanner/Banner/preview/preview_mfp.html.twig', $data),
             ]);
         }
 
@@ -118,7 +118,7 @@ class BannerController extends Controller {
 
         $data = [
             'banner' => $banner,
-            'form'   => $form->createView()
+            'form' => $form->createView(),
         ];
 
         return $this->render('@WucdbmBanner/Banner/edit.html.twig', $data);
@@ -131,22 +131,21 @@ class BannerController extends Controller {
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            if ($banner->getContent() === null) {
+            if (null === $banner->getContent()) {
                 $banner->setContent('');
             }
 
             $this->bannerManager->saveBanner($banner);
 
             return $this->redirectToRoute('wucdbm_banner_banner_edit', [
-                'id' => $banner->getId()
+                'id' => $banner->getId(),
             ]);
         }
 
         $data = [
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ];
 
         return $this->render('@WucdbmBanner/Banner/create.html.twig', $data);
     }
-
 }

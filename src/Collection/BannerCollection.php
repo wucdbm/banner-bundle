@@ -20,7 +20,7 @@ class BannerCollection {
 
     /**
      * @param BannerPosition[] $positions
-     * @param bool $debug
+     * @param bool             $debug
      */
     public function __construct(array $positions, $debug = false) {
         $this->debug = $debug;
@@ -47,6 +47,7 @@ class BannerCollection {
 
     /**
      * @param $name
+     *
      * @return BannerPosition|null
      */
     public function get($name) {
@@ -54,9 +55,10 @@ class BannerCollection {
     }
 
     /**
-     * Has position
+     * Has position.
      *
      * @param $name
+     *
      * @return bool
      */
     public function has($name) {
@@ -65,6 +67,7 @@ class BannerCollection {
 
     /**
      * @param $name
+     *
      * @return bool
      */
     public function hasBanner($name) {
@@ -82,17 +85,16 @@ class BannerCollection {
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isDebug() {
         return $this->debug;
     }
 
     /**
-     * @param boolean $debug
+     * @param bool $debug
      */
     public function setDebug($debug) {
         $this->debug = $debug;
     }
-
 }

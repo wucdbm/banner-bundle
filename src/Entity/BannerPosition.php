@@ -52,20 +52,20 @@ class BannerPosition {
      */
     protected $banner;
 
-
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId() {
         return $this->id;
     }
 
     /**
-     * Set name
+     * Set name.
      *
      * @param string $name
+     *
      * @return BannerPosition
      */
     public function setName($name) {
@@ -75,7 +75,7 @@ class BannerPosition {
     }
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
@@ -84,9 +84,10 @@ class BannerPosition {
     }
 
     /**
-     * Set description
+     * Set description.
      *
      * @param string $description
+     *
      * @return BannerPosition
      */
     public function setDescription($description) {
@@ -96,7 +97,7 @@ class BannerPosition {
     }
 
     /**
-     * Get description
+     * Get description.
      *
      * @return string
      */
@@ -105,9 +106,10 @@ class BannerPosition {
     }
 
     /**
-     * Set isActive
+     * Set isActive.
      *
-     * @param boolean $isActive
+     * @param bool $isActive
+     *
      * @return BannerPosition
      */
     public function setIsActive($isActive) {
@@ -117,18 +119,19 @@ class BannerPosition {
     }
 
     /**
-     * Get isActive
+     * Get isActive.
      *
-     * @return boolean
+     * @return bool
      */
     public function getIsActive() {
         return $this->isActive;
     }
 
     /**
-     * Set banner
+     * Set banner.
      *
      * @param \Wucdbm\Bundle\BannerBundle\Entity\Banner $banner
+     *
      * @return BannerPosition
      */
     public function setBanner(\Wucdbm\Bundle\BannerBundle\Entity\Banner $banner = null) {
@@ -138,12 +141,11 @@ class BannerPosition {
     }
 
     /**
-     * Get banner
+     * Get banner.
      *
      * @return \Wucdbm\Bundle\BannerBundle\Entity\Banner
      */
     public function getBanner() {
         return $this->banner;
     }
-
 }

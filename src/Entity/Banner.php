@@ -45,32 +45,33 @@ class Banner {
      * @ORM\Column(name="is_active", type="boolean")
      */
     protected $isActive = true;
-    
+
     /**
      * @ORM\OneToMany(targetEntity="Wucdbm\Bundle\BannerBundle\Entity\BannerPosition", mappedBy="banner")
      */
     protected $positions;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct() {
         $this->positions = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId() {
         return $this->id;
     }
 
     /**
-     * Set name
+     * Set name.
      *
      * @param string $name
+     *
      * @return Banner
      */
     public function setName($name) {
@@ -80,7 +81,7 @@ class Banner {
     }
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
@@ -89,9 +90,10 @@ class Banner {
     }
 
     /**
-     * Set content
+     * Set content.
      *
      * @param string $content
+     *
      * @return Banner
      */
     public function setContent($content) {
@@ -101,7 +103,7 @@ class Banner {
     }
 
     /**
-     * Get content
+     * Get content.
      *
      * @return string
      */
@@ -110,9 +112,10 @@ class Banner {
     }
 
     /**
-     * Set isActive
+     * Set isActive.
      *
-     * @param boolean $isActive
+     * @param bool $isActive
+     *
      * @return Banner
      */
     public function setIsActive($isActive) {
@@ -122,18 +125,19 @@ class Banner {
     }
 
     /**
-     * Get isActive
+     * Get isActive.
      *
-     * @return boolean
+     * @return bool
      */
     public function getIsActive() {
         return $this->isActive;
     }
 
     /**
-     * Add positions
+     * Add positions.
      *
      * @param \Wucdbm\Bundle\BannerBundle\Entity\BannerPosition $positions
+     *
      * @return Banner
      */
     public function addPosition(\Wucdbm\Bundle\BannerBundle\Entity\BannerPosition $positions) {
@@ -143,7 +147,7 @@ class Banner {
     }
 
     /**
-     * Remove positions
+     * Remove positions.
      *
      * @param \Wucdbm\Bundle\BannerBundle\Entity\BannerPosition $positions
      */
@@ -152,7 +156,7 @@ class Banner {
     }
 
     /**
-     * Get positions
+     * Get positions.
      *
      * @return \Doctrine\Common\Collections\Collection
      */

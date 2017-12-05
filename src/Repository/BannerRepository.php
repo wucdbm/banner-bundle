@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the BannerBundle package.
+ *
+ * (c) Martin Kirilov <wucdbm@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Wucdbm\Bundle\BannerBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
@@ -23,7 +32,7 @@ class BannerRepository extends EntityRepository {
 
         if ($filter->getName()) {
             $builder->andWhere('banners.name LIKE :name');
-            $builder->setParameter('name', '%' . $filter->getName() . '%');
+            $builder->setParameter('name', '%'.$filter->getName().'%');
         }
 
         if (null !== $filter->getIsActive()) {
@@ -68,5 +77,4 @@ class BannerRepository extends EntityRepository {
         $em->persist($banner);
         $em->flush();
     }
-
 }

@@ -46,20 +46,20 @@ class BannerChoiceController extends Controller {
         /** @var BannerPosition $position */
         foreach ($positions as $position) {
             $forms[$position->getId()] = $this->createForm(BannerPositionChooseType::class, $position, [
-                'attr'   => [
-                    'class' => 'position-form'
+                'attr' => [
+                    'class' => 'position-form',
                 ],
                 'action' => $this->generateUrl('wucdbm_banner_choice_update_banner', [
-                    'id' => $position->getId()
-                ])
+                    'id' => $position->getId(),
+                ]),
             ])->createView();
         }
 
         $data = [
-            'filter'     => $filter,
+            'filter' => $filter,
             'pagination' => $pagination,
             'filterForm' => $filterForm->createView(),
-            'forms'      => $forms
+            'forms' => $forms,
         ];
 
         return $this->render('@WucdbmBanner/BannerChoice/choose.html.twig', $data);
@@ -85,17 +85,16 @@ class BannerChoiceController extends Controller {
 
             return $this->json([
                 'message' => [
-                    'text' => $msg
-                ]
+                    'text' => $msg,
+                ],
             ]);
         }
 
         return $this->json([
             'message' => [
                 'title' => 'Error',
-                'text'  => 'There was an error trying to save the selected banner'
-            ]
+                'text' => 'There was an error trying to save the selected banner',
+            ],
         ]);
     }
-
 }

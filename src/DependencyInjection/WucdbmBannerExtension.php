@@ -24,7 +24,7 @@ class WucdbmBannerExtension extends Extension {
 
         $loader = new XmlFileLoader(
             $container,
-            new FileLocator(__DIR__ . '/../Resources/config')
+            new FileLocator(__DIR__.'/../Resources/config')
         );
 
         $bag = $container->getParameterBag();
@@ -36,11 +36,10 @@ class WucdbmBannerExtension extends Extension {
     }
 
     public function getXsdValidationBasePath() {
-        return __DIR__ . '/../Resources/config/';
+        return __DIR__.'/../Resources/config/';
     }
 
     public function getNamespace() {
         return 'http://www.example.com/symfony/schema/';
     }
-
 }

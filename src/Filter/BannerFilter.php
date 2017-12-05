@@ -1,13 +1,22 @@
 <?php
 
+/*
+ * This file is part of the BannerBundle package.
+ *
+ * (c) Martin Kirilov <wucdbm@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Wucdbm\Bundle\BannerBundle\Filter;
 
 use Wucdbm\Bundle\QuickUIBundle\Filter\AbstractFilter;
 
 class BannerFilter extends AbstractFilter {
 
-    const IS_ACTIVE_TRUE = 1,
-        IS_ACTIVE_FALSE = 0;
+    const IS_ACTIVE_TRUE = 1;
+    const IS_ACTIVE_FALSE = 0;
 
     protected $id;
 
@@ -56,5 +65,4 @@ class BannerFilter extends AbstractFilter {
     public function setIsActive($isActive) {
         $this->isActive = $isActive;
     }
-
 }

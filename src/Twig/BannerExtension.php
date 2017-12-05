@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the BannerBundle package.
+ *
+ * (c) Martin Kirilov <wucdbm@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Wucdbm\Bundle\BannerBundle\Twig;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -31,8 +40,8 @@ class BannerExtension extends \Twig_Extension {
         return [
             new \Twig_SimpleFilter('banner', [$this, 'banner'], [
                 'is_safe' => [
-                    'html'
-                ]
+                    'html',
+                ],
             ]),
         ];
     }
@@ -41,8 +50,8 @@ class BannerExtension extends \Twig_Extension {
         return [
             new \Twig_SimpleFunction('banner', [$this, 'banner'], [
                 'is_safe' => [
-                    'html'
-                ]
+                    'html',
+                ],
             ]),
             new \Twig_SimpleFunction('showBannerPositionsUrl', [$this, 'showBannerPositionsUrl']),
         ];
@@ -57,35 +66,35 @@ class BannerExtension extends \Twig_Extension {
                     if ($position->getBanner()->getIsActive()) {
                         $data = [
                             'position' => $collection->get($name),
-                            'debug'    => $collection->isDebug()
+                            'debug' => $collection->isDebug(),
                         ];
 
                         return $this->twig->render('@WucdbmBanner/Banner/render/banner.html.twig', $data);
                     }
 
                     $data = [
-                        'position' => $collection->get($name)
+                        'position' => $collection->get($name),
                     ];
 
                     return $this->twig->render('@WucdbmBanner/Banner/render/warning_banner_inactive.html.twig', $data);
                 }
 
                 $data = [
-                    'position' => $collection->get($name)
+                    'position' => $collection->get($name),
                 ];
 
                 return $this->twig->render('@WucdbmBanner/Banner/render/warning_no_banner.html.twig', $data);
             }
 
             $data = [
-                'name' => $name
+                'name' => $name,
             ];
 
             return $this->twig->render('@WucdbmBanner/Banner/render/wraning_position_inactive.html.twig', $data);
         }
 
         $data = [
-            'name' => $name
+            'name' => $name,
         ];
 
         return $this->twig->render('@WucdbmBanner/Banner/render/wraning_no_position.html.twig', $data);
@@ -114,5 +123,4 @@ class BannerExtension extends \Twig_Extension {
 
         return $this->collection;
     }
-
 }

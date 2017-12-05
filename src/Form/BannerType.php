@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the BannerBundle package.
+ *
+ * (c) Martin Kirilov <wucdbm@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Wucdbm\Bundle\BannerBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
@@ -11,32 +20,32 @@ class BannerType extends AbstractType {
 
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
             ->add('name', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
-                'label'       => 'Name',
-                'attr'        => [
-                    'placeholder' => 'Name'
+                'label' => 'Name',
+                'attr' => [
+                    'placeholder' => 'Name',
                 ],
                 'constraints' => [
-                    new NotBlank()
-                ]
+                    new NotBlank(),
+                ],
             ])
             ->add('content', 'Symfony\Component\Form\Extension\Core\Type\TextareaType', [
-                'label'       => 'Content',
-                'attr'        => [
-                    'rows'        => 16,
-                    'placeholder' => 'Put your banner HTML here'
+                'label' => 'Content',
+                'attr' => [
+                    'rows' => 16,
+                    'placeholder' => 'Put your banner HTML here',
                 ],
                 'constraints' => [
-                    new NotBlank()
-                ]
+                    new NotBlank(),
+                ],
             ])
             ->add('isActive', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType', [
-                'label'    => 'Active',
-                'required' => false
+                'label' => 'Active',
+                'required' => false,
             ]);
     }
 
@@ -45,8 +54,7 @@ class BannerType extends AbstractType {
      */
     public function configureOptions(OptionsResolver $resolver) {
         $resolver->setDefaults([
-            'data_class' => 'Wucdbm\Bundle\BannerBundle\Entity\Banner'
+            'data_class' => 'Wucdbm\Bundle\BannerBundle\Entity\Banner',
         ]);
     }
-
 }

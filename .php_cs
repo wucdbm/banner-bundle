@@ -1,5 +1,14 @@
 <?php
 
+$headerComment = <<<COMMENT
+This file is part of the BannerBundle package.
+
+(c) Martin Kirilov <wucdbm@gmail.com>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+COMMENT;
+
 $finder = PhpCsFixer\Finder::create()->in(__DIR__ . '/src');
 
 return PhpCsFixer\Config::create()
@@ -15,6 +24,9 @@ return PhpCsFixer\Config::create()
         ],
         'braces'                                       => [
             'position_after_functions_and_oop_constructs' => 'same'
+        ],
+        'header_comment' => [
+            'header' => $headerComment
         ]
     ])
     ->setUsingCache(false)
