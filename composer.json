@@ -17,6 +17,10 @@
         "symfony/symfony": "~3.4|~4.0",
         "wucdbm/quick-ui-bundle": "~0.2"
     },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^2.8",
+        "wucdbm/php-cs-fixers": "~0.1"
+    },
     "autoload": {
         "psr-4": {
             "Wucdbm\\Bundle\\BannerBundle\\": ""
