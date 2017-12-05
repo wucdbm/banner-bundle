@@ -1,9 +1,6 @@
 <?php
 
-$finder = PhpCsFixer\Finder::create()
-//    ->exclude('somedir')
-//    ->notPath('src/Symfony/Component/Translation/Tests/fixtures/resources.php')
-    ->in(__DIR__ . '/src');
+$finder = PhpCsFixer\Finder::create()->in(__DIR__ . '/src');
 
 return PhpCsFixer\Config::create()
     ->registerCustomFixers([

@@ -23,7 +23,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Wucdbm\\Bundle\\BannerBundle\\": ""
+            "Wucdbm\\Bundle\\BannerBundle\\": "src"
         }
     },
     "license": "GPL-3.0"
